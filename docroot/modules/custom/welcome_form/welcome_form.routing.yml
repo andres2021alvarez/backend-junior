@@ -1,0 +1,7 @@
+welcome_form.page:
+  path: "/welcome"
+  defaults:
+    _controller: '\Drupal\welcome_form\Controller\WelcomeController::page'
+    _title: "Welcome to Our Site"
+  requirements:
+    _access: 'TRUE'

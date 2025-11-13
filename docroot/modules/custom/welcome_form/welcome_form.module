@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Hook_theme.
+ */
+function welcome_form_theme($existing, $type, $theme, $path) {
+  return [
+    'welcome_page' => [
+      'variables' => ['welcome_message' => NULL],
+      'template' => 'welcome-page',
+    ],
+  ];
+}
