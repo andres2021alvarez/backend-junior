@@ -1,0 +1,13 @@
+{
+    "require": {
+        "drupal/core-recommended": "11.1.9",
+        "drupal/core-composer-scaffold": "11.1.9",
+        "drupal/core-project-message": "11.1.9"
+    },
+    "config": {
+        "allow-plugins": {
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true
+        }
+    }
+}
