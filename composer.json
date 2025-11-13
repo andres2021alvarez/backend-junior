@@ -10,16 +10,43 @@
         }
     ],
     "require": {
-         "drupal/core-recommended": "11.1.9",
-        "drupal/core-composer-scaffold": "11.1.9",
-        "drupal/core-project-message": "11.1.9"
+        "php": ">=8.3",
+        "acquia/acquia-cms-starterkit": "^1",
+        "acquia/drupal-environment-detector": "^1",
+        "acquia/drupal-recommended-settings": "^1.0",
+        "acquia/memcache-settings": "^1",
+        "composer/installers": "^2.1",
+        "cweagans/composer-patches": "^1.6",
+        "drupal/config_sync_without_site_uuid": "^1.0@beta",
+        "drupal/core-composer-scaffold": "^11",
+        "drupal/core-recommended": "^11",
+        "drupal/mysql57": "^1.0",
+        "drush/drush": "^13",
+        "oomphinc/composer-installers-extender": "^2"
     },
- "extra": {
-        "merge-plugin": {
-            "include": [
-                "composer.libraries.json"
-            ]
+    "require-dev": {
+        "acquia/coding-standards": "^3.0.0",
+        "drupal/core-dev": "^11.1.8"
+    },
+    "config": {
+        "allow-plugins": {
+            "acquia/drupal-recommended-settings": true,
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "drupal/core-composer-scaffold": true,
+            "ergebnis/composer-normalize": true,
+            "oomphinc/composer-installers-extender": true,
+            "php-http/discovery": true,
+            "phpstan/extension-installer": true,
+            "tbachert/spi": true
         },
+        "platform": {
+            "php": "8.3"
+        },
+        "sort-packages": true
+    },
+    "extra": {
         "composer-exit-on-patch-failure": true,
         "drupal-scaffold": {
             "allowed-packages": [
@@ -29,7 +56,17 @@
                 "[profile-root]/.editorconfig": false,
                 "[profile-root]/.gitattributes": false,
                 "[profile-root]/.travis.yml": false,
-                "[profile-root]/acquia-pipelines.yml": false
+                "[profile-root]/acquia-pipelines.yml": false,
+                "[web-root]/sites/default/default.services.yml": {
+                    "mode": "replace",
+                    "overwrite": false,
+                    "path": "docroot/core/assets/scaffold/files/default.services.yml"
+                },
+                "[web-root]/sites/default/default.settings.php": {
+                    "mode": "replace",
+                    "overwrite": false,
+                    "path": "docroot/core/assets/scaffold/files/default.settings.php"
+                }
             },
             "gitignore": true,
             "locations": {
@@ -45,8 +82,7 @@
             "docroot/libraries/{$name}": [
                 "type:drupal-library",
                 "type:bower-asset",
-                "type:npm-asset",
-                "nnnick/chartjs"
+                "type:npm-asset"
             ],
             "docroot/modules/contrib/{$name}": [
                 "type:drupal-module"
@@ -74,43 +110,23 @@
         "patchLevel": {
             "drupal/core": "-p2"
         },
-        "patches": {
-            "drupal/shield": {
-                "Add feature to set username and password for multiple users": "https://www.drupal.org/files/issues/2023-04-21/shield-multiple_user_support-2931945-3.patch"
-            },
-            "drupal/core": {
-                "fixed js views": "https://www.drupal.org/files/issues/2023-04-21/drupal-dynamic_pager_id-3225987-19.patch",
-                "Fix CKEditor text component issue in Site Studio": "https://www.drupal.org/files/issues/2024-06-05/3443422.patch"
-            },
-            "drupal/eloqua_api_redux": {
-                "Submodule compatible D10": "patches/local/eloqua_api_auth_fallback_compatibleD10.patch",
-                "Increase API call page size for getForms()": "https://www.drupal.org/files/issues/2024-01-05/3412201-3-increase-page-size-number-of-entities-to-return.patch"
-            },
-            "drupal/sitestudio_config_management": {
-                "Remove upgrade check": "patches/local/remove-upgrade-check.patch"
-            },
-            "drupal/advagg": {
-                "Deprecated function: Creation of dynamic property": "https://www.drupal.org/files/issues/2024-01-16/deprecated-function-creation-of-dynamic-property-3375725-17.patch"
-            }
-        }
+        "patches": {}
     },
-
     "repositories": {
         "drupal": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
-        },
-        "npm-assets": {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
         }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "config": {
-        "allow-plugins": {
-            "drupal/core-composer-scaffold": true,
-            "drupal/core-project-message": true
-        }
+    "scripts": {
+        "acms:install": [
+            "Composer\\Config::disableProcessTimeout",
+            "./vendor/bin/acms acms:install"
+        ],
+        "nuke": [
+            "rm -rf docroot vendor composer.lock"
+        ]
     }
 }
