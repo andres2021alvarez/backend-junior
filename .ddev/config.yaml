@@ -1,6 +1,6 @@
 name: backend-junior
 type: drupal11
-docroot: ""
+docroot: docroot
 php_version: "8.3"
 webserver_type: nginx-fpm
 xdebug_enabled: false
