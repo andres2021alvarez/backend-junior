@@ -1,19 +1,19 @@
 <?php return array(
     'root' => array(
-        'name' => '__root__',
+        'name' => 'acquia/drupal-recommended-project',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'c4226de4cf8ed91ed4ab52e1c642de666980ad96',
+        'reference' => '275c72a12a10c84b89d4e5e32b485c677b546d19',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
-        '__root__' => array(
+        'acquia/drupal-recommended-project' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'c4226de4cf8ed91ed4ab52e1c642de666980ad96',
+            'reference' => '275c72a12a10c84b89d4e5e32b485c677b546d19',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
